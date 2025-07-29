@@ -1,0 +1,449 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website Requirements Form</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- jsPDF for PDF generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+   
+</head> 
+<body>
+  <h1>Website Requirements Form</h1>
+  <div class="container">
+    <div class="form-section">
+      <!-- Step 1: Company & Your Information -->
+      <div class="form-step active" id="step1">
+        <h2>Step 1: Company & Your Information</h2>
+        <!-- Company fields -->
+        <div class="question"><label>Company Name<input type="text" id="companyName" required></label></div>
+        <div class="question"><label>Company Email<input type="email" id="companyEmail" required></label></div>
+        <div class="question"><label>Phone Number<input type="tel" id="companyPhone" required></label></div>
+        <div class="question"><label>Salesperson<input type="text" id="salesperson" required></label></div>
+        <div class="question"><label>Company Logo<input type="file" id="companyLogo" accept="image/*" required></label></div>
+        <hr />
+        <!-- User fields -->
+        <div class="question"><label>Your Name<input type="text" id="userName" placeholder="Your full name" required></label></div>
+        <div class="question"><label>Your Email<input type="email" id="userEmail" placeholder="Your email" required></label></div>
+        <div class="question"><label>Your Phone<input type="tel" id="userPhone" placeholder="Your contact number" required></label></div>
+        <div class="btn-group"><button class="btn btn-primary" id="next1">Next »</button></div>
+      </div>
+      <!-- Step 2: Website Type -->
+     <!-- <div class="form-step" id="step2">
+        <h2>Step 2: Website Type</h2>
+        <div class="question">Please select the type of website:</div>
+        <div class="options">
+          <label title="Quick Solution (350 KD)"><input type="radio" name="siteType" value="quick" checked> Quick (350 KD)</label>
+          <label title="Custom design (1000 KD)"><input type="radio" name="siteType" value="custom"> Custom (1000 KD)</label>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-secondary" id="prev2">« Previous</button>
+          <button class="btn btn-primary" id="next2">Next »</button>
+        </div>
+      </div>   -->
+
+      <!-- Step 2: Website Type -->
+<div class="form-step" id="step2">
+  <h2>Step 2: Website Type</h2>
+
+  <div class="note">
+    <strong>Choose the type of website you need:</strong><br>
+    • <strong>Quick Solution</strong> : A ready-made template with minor edits, perfect for fast delivery (Estimated delivery: 7 to 10 working days for Approx. 350 KD)<br>
+    • <strong>Custom Design</strong> : A fully customized design built from scratch, tailored to your exact needs (Estimated delivery: 3 to 6 weeks for Approx. 1000 KD)
+  </div><br>
+
+  <div class="note">
+    Prices are estimates. Final cost may vary based on features and requirements.
+  </div><br>
+
+  <p class="note" style="margin-top: 10px;">
+    Need more details? <a href="Website Development Packages Report.pdf" download target="_blank" style="color: var(--primary); text-decoration: underline;">Click here to download full info</a>.
+  </p>
+  
+
+  <div class="question"><strong>Which website type do you need?</strong></div><br>
+  <div class="options">
+    <label class="option-box" title="Ready-made template, fast delivery">
+      <input type="radio" name="siteType" value="quick" checked>
+      Quick Solution (350 KD)
+    </label>
+    <label class="option-box" title="Fully customized, unique design">
+      <input type="radio" name="siteType" value="custom">
+      Custom Website (1000 KD)
+    </label>
+  </div>
+
+  <div class="question" style="margin-top: 20px;">
+    Choose your preferred primary color for the website:
+  </div>
+  <div class="color-picker" style="margin-top: 8px;">
+    <input type="color" id="primaryColor" name="primaryColor" value="#20285D" style="width: 60px; height: 40px; border: none; cursor: pointer;">
+  </div>
+  <p class="note">This color will be used as the main accent across your site (e.g., buttons, headers).</p>
+  
+
+  <div class="btn-group">
+    <button class="btn btn-secondary" id="prev2">« Previous</button>
+    <button class="btn btn-primary" id="next2">Next »</button>
+  </div>
+</div>
+
+      
+      <!-- Step 3: Features -->
+      <div class="form-step" id="step3">
+        <h2>Step 3: Features</h2>
+        <div class="question">Select site features:</div>
+        <div class="features-grid">
+          <div class="feature-option" data-value="About Us">About Us</div>
+          <div class="feature-option" data-value="Careers">Careers</div>
+          <div class="feature-option" data-value="Contact Form">Contact Form</div>
+          <div class="feature-option" data-value="Newsletter">Newsletter</div>
+          <div class="feature-option" data-value="Login">User Login</div>
+          <div class="feature-option" data-value="Cart">Cart</div>
+        </div>
+        <div class="question"><label>Other:<input type="text" id="featureOtherText" placeholder="Specify"></label></div>
+        <div class="btn-group">
+          <button class="btn btn-secondary" id="prev3">« Previous</button>
+          <button class="btn btn-primary" id="next3">Next »</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Templates -->
+<div class="form-step" id="step4">
+  <h2>Step 4: Choose a Template</h2>
+  <div class="template-grid">
+    <div class="template-option" data-template-id="1" data-preview-url="https://nunforest.com/koad-demo/?storefront=envato-elements">
+      <img class="template-thumb" src="pngs/1.png" alt="Template 1" style="max-width: 200px; height: auto;">
+      <div class="template-desc">Home, Menu, Reservation, About Us, Testimonials, Gallery, Contact</div>
+      <div class="btn-group">
+        <button class="btn btn-primary select-template">Select</button>
+        <a class="btn btn-secondary preview-template" href="https://nunforest.com/koad-demo/?storefront=envato-elements" target="_blank">Preview</a>
+      </div>
+    </div>
+
+    <div class="template-option" data-template-id="2" data-preview-url="https://bestwpware.com/html/tf/duralux-demo/?storefront=envato-elements">
+      <img class="template-thumb" src="pngs/2.png" alt="Template 2" style="max-width: 200px; height: auto;">
+      <div class="template-desc">Dashboards (Light/Dark), Analytics, User Mgmt, Tables, Forms, Widgets, Settings</div>
+      <div class="btn-group">
+        <button class="btn btn-primary select-template">Select</button>
+        <a class="btn btn-secondary preview-template" href="https://bestwpware.com/html/tf/duralux-demo/?storefront=envato-elements" target="_blank">Preview</a>
+      </div>
+    </div>
+
+    <div class="template-option" data-template-id="3" data-preview-url="https://html.creativegigstf.com/charles/?storefront=envato-elements">
+      <img class="template-thumb" src="pngs/3.png" alt="Template 3" style="max-width: 200px; height: auto;">
+      <div class="template-desc">Home, Portfolio, Case Studies, About Us, Services, Testimonials, Blog, Contact</div>
+      <div class="btn-group">
+        <button class="btn btn-primary select-template">Select</button>
+        <a class="btn btn-secondary preview-template" href="https://html.creativegigstf.com/charles/?storefront=envato-elements" target="_blank">Preview</a>
+      </div>
+    </div>
+
+    <div class="template-option" data-template-id="4" data-preview-url="https://html.merku.love/axial/?storefront=envato-elements">
+      <img class="template-thumb" src="pngs/4.png" alt="Template 4" style="max-width: 200px; height: auto;">
+      <div class="template-desc">Home (2), Services, Projects, Team, Testimonials, About Us, Contact</div>
+      <div class="btn-group">
+        <button class="btn btn-primary select-template">Select</button>
+        <a class="btn btn-secondary preview-template" href="https://html.merku.love/axial/?storefront=envato-elements" target="_blank">Preview</a>
+      </div>
+    </div>
+
+    <div class="template-option" data-template-id="5" data-preview-url="https://template.hasthemes.com/hurst-v1/tf.html?storefront=envato-elements">
+      <img class="template-thumb" src="pngs/5.png" alt="Template 5" style="max-width: 200px; height: auto;">
+      <div class="template-desc">Home (2), Shop, Product Detail, Cart, Checkout, Wishlist, Blog, Contact</div>
+      <div class="btn-group">
+        <button class="btn btn-primary select-template">Select</button>
+        <a class="btn btn-secondary preview-template" href="https://template.hasthemes.com/hurst-v1/tf.html?storefront=envato-elements" target="_blank">Preview</a>
+      </div>
+    </div>
+
+    <div class="template-option" data-template-id="6" data-preview-url="https://demo.bosathemes.com/html/travele/?storefront=envato-elements">
+      <img class="template-thumb" src="pngs/6.png" alt="Template 6" style="max-width: 200px; height: auto;">
+      <div class="template-desc">Home, Tours List, Tour Detail, About, Destinations, Booking, Blog, Gallery, Contact</div>
+      <div class="btn-group">
+        <button class="btn btn-primary select-template">Select</button>
+        <a class="btn btn-secondary preview-template" href="https://demo.bosathemes.com/html/travele/?storefront=envato-elements" target="_blank">Preview</a>
+      </div>
+    </div>
+
+    <div class="template-option" data-template-id="7" data-preview-url="https://glamics.temptics.com/?storefront=envato-elements">
+      <img class="template-thumb" src="pngs/7.png" alt="Template 7" style="max-width: 200px; height: auto;">
+      <div class="template-desc">Home, Shop, Product Detail, Cart, Wishlist, Account, About Us, Blog, Contact</div>
+      <div class="btn-group">
+        <button class="btn btn-primary select-template">Select</button>
+        <a class="btn btn-secondary preview-template" href="https://glamics.temptics.com/?storefront=envato-elements" target="_blank">Preview</a>
+      </div>
+    </div>
+
+    <div class="template-option" data-template-id="8" data-preview-url="https://zoyothemes.com/tailwind/evea/cakephp?storefront=envato-elements">
+      <img class="template-thumb" src="pngs/8.png" alt="Template 8" style="max-width: 200px; height: auto;">
+      <div class="template-desc">Home (6+), Features, Gallery, Pricing, Testimonials, About, CTA, Contact</div>
+      <div class="btn-group">
+        <button class="btn btn-primary select-template">Select</button>
+        <a class="btn btn-secondary preview-template" href="https://zoyothemes.com/tailwind/evea/cakephp?storefront=envato-elements" target="_blank">Preview</a>
+      </div>
+    </div>
+
+    <div class="template-option" data-template-id="9" data-preview-url="https://ex-coders.com/html/niotech/?storefront=envato-elements">
+      <img class="template-thumb" src="pngs/9.png" alt="Template 9" style="max-width: 200px; height: auto;">
+      <div class="template-desc">Home, Features, Gallery, Pricing, Testimonials, Team, Contact, CTA</div>
+      <div class="btn-group">
+        <button class="btn btn-primary select-template">Select</button>
+        <a class="btn btn-secondary preview-template" href="https://ex-coders.com/html/niotech/?storefront=envato-elements" target="_blank">Preview</a>
+      </div>
+    </div>
+
+    <div class="template-option" data-template-id="10" data-preview-url="https://pixydrops.com/infetech/?storefront=envato-elements">
+      <img class="template-thumb" src="pngs/10.png" alt="Template 10" style="max-width: 200px; height: auto;">
+      <div class="template-desc">Home (5), Services, Projects, Pricing, Team, Testimonials, Blog, Contact</div>
+      <div class="btn-group">
+        <button class="btn btn-primary select-template">Select</button>
+        <a class="btn btn-secondary preview-template" href="https://pixydrops.com/infetech/?storefront=envato-elements" target="_blank">Preview</a>
+      </div>
+    </div>
+  
+
+<div class="template-option" data-template-id="11" data-preview-url="https://themegenix.net/html/suxnix-preview/?storefront=envato-elements">
+  <img class="template-thumb" src="pngs/11.png" alt="Template 11" style="max-width: 200px; height: auto;">
+  <div class="template-desc">Home, Shop, Product Detail, Features, FAQ, Blog, Contact</div>
+  <div class="btn-group">
+    <button class="btn btn-primary select-template">Select</button>
+    <a class="btn btn-secondary preview-template" href="https://themegenix.net/html/suxnix-preview/?storefront=envato-elements" target="_blank">Preview</a>
+  </div>
+</div>
+
+<div class="template-option" data-template-id="12" data-preview-url="https://demo.epic-webdesign.com/tf-fable/demo/?storefront=envato-elements">
+  <img class="template-thumb" src="pngs/12.png" alt="Template 12" style="max-width: 200px; height: auto;">
+  <div class="template-desc">Home, Menu, About Us, Gallery, Booking, Blog, Contact</div>
+  <div class="btn-group">
+    <button class="btn btn-primary select-template">Select</button>
+    <a class="btn btn-secondary preview-template" href="https://demo.epic-webdesign.com/tf-fable/demo/?storefront=envato-elements" target="_blank">Preview</a>
+  </div>
+</div>
+
+<div class="template-option" data-template-id="13" data-preview-url="https://solverwp.com/demo/react/bizkar/?storefront=envato-elements#/">
+  <img class="template-thumb" src="pngs/13.png" alt="Template 13" style="max-width: 200px; height: auto;">
+  <div class="template-desc">Home (4), About, Services, Portfolio, Pricing, Blog, Contact</div>
+  <div class="btn-group">
+    <button class="btn btn-primary select-template">Select</button>
+    <a class="btn btn-secondary preview-template" href="https://solverwp.com/demo/react/bizkar/?storefront=envato-elements#/" target="_blank">Preview</a>
+  </div>
+</div>
+
+<div class="template-option" data-template-id="14" data-preview-url="https://themazine.com/thewp/landestate/?storefront=envato-elements">
+  <img class="template-thumb" src="pngs/14.png" alt="Template 14" style="max-width: 200px; height: auto;">
+  <div class="template-desc">Home, Property List, Property Detail, Agents, Services, Blog, Contact</div>
+  <div class="btn-group">
+    <button class="btn btn-primary select-template">Select</button>
+    <a class="btn btn-secondary preview-template" href="https://themazine.com/thewp/landestate/?storefront=envato-elements" target="_blank">Preview</a>
+  </div>
+</div>
+
+<div class="template-option" data-template-id="15" data-preview-url="https://abcgomel.ru/haswell/intro.html?storefront=envato-elements">
+  <img class="template-thumb" src="pngs/15.png" alt="Template 15" style="max-width: 200px; height: auto;">
+  <div class="template-desc">Home (20+), About, Portfolio, Blog, Shop, FAQ, Contact, 404, Coming Soon</div>
+  <div class="btn-group">
+    <button class="btn btn-primary select-template">Select</button>
+    <a class="btn btn-secondary preview-template" href="https://abcgomel.ru/haswell/intro.html?storefront=envato-elements" target="_blank">Preview</a>
+  </div>
+</div>
+
+<div class="template-option" data-template-id="16" data-preview-url="https://demoxml.com/html/construct/?storefront=envato-elements">
+  <img class="template-thumb" src="pngs/16.png" alt="Template 16" style="max-width: 200px; height: auto;">
+  <div class="template-desc">Home, Projects, Services, About, Blog, Contact</div>
+  <div class="btn-group">
+    <button class="btn btn-primary select-template">Select</button>
+    <a class="btn btn-secondary preview-template" href="https://demoxml.com/html/construct/?storefront=envato-elements" target="_blank">Preview</a>
+  </div>
+</div>
+
+<div class="template-option" data-template-id="17" data-preview-url="https://theme7x.com/shapen-preview/?storefront=envato-elements">
+  <img class="template-thumb" src="pngs/17.png" alt="Template 17" style="max-width: 200px; height: auto;">
+  <div class="template-desc">Home (4), Services, Projects, Team, Blog, Contact</div>
+  <div class="btn-group">
+    <button class="btn btn-primary select-template">Select</button>
+    <a class="btn btn-secondary preview-template" href="https://theme7x.com/shapen-preview/?storefront=envato-elements" target="_blank">Preview</a>
+  </div>
+</div>
+
+<div class="template-option" data-template-id="18" data-preview-url="https://templates.thememodern.com/industris/?storefront=envato-elements">
+  <img class="template-thumb" src="pngs/18.png" alt="Template 18" style="max-width: 200px; height: auto;">
+  <div class="template-desc">Home, About, Projects, Services, Blog, Contact</div>
+  <div class="btn-group">
+    <button class="btn btn-primary select-template">Select</button>
+    <a class="btn btn-secondary preview-template" href="https://templates.thememodern.com/industris/?storefront=envato-elements" target="_blank">Preview</a>
+  </div>
+</div>
+
+<div class="template-option" data-template-id="19" data-preview-url="https://templates.framework-y.com/yellowbusiness/pages/index.html?storefront=envato-elements">
+  <img class="template-thumb" src="pngs/19.png" alt="Template 19" style="max-width: 200px; height: auto;">
+  <div class="template-desc">Home, About, Services, Projects, Stats, Contact (RTL ready)</div>
+  <div class="btn-group">
+    <button class="btn btn-primary select-template">Select</button>
+    <a class="btn btn-secondary preview-template" href="https://templates.framework-y.com/yellowbusiness/pages/index.html?storefront=envato-elements" target="_blank">Preview</a>
+  </div>
+</div>
+
+<div class="template-option" data-template-id="20" data-preview-url="https://html.themexriver.com/consulting/index-two.html">
+  <img class="template-thumb" src="pngs/20.png" alt="Template 20" style="max-width: 200px; height: auto;">
+  <div class="template-desc">Home (7), About, Services, Case Studies, Blog, Pricing, Contact</div>
+  <div class="btn-group">
+    <button class="btn btn-primary select-template">Select</button>
+    <a class="btn btn-secondary preview-template" href="https://html.themexriver.com/consulting/index-two.html" target="_blank">Preview</a>
+  </div> 
+</div>
+<div class="btn-group" style="width: 100px; height: 50px;">
+  <button class="btn btn-secondary"  id="prev4">« Previous</button><br><br>
+  <button class="btn btn-primary" id="next4">Next »</button>
+  </div>
+</div>
+
+
+</div>
+
+      <!-- Step 5: Hosting -->
+   <!--   <div class="form-step" id="step5">
+        <h2>Step 5: Hosting</h2>
+        <div class="options">
+          <label><input type="radio" name="hosting" value="yes"> Yes (100 KD)</label>
+          <label><input type="radio" name="hosting" value="no" checked> No</label>
+        </div>
+        <p class="note">Hosting includes server & maintenance.</p>
+        <div class="btn-group">
+          <button class="btn btn-secondary" id="prev5">« Previous</button>
+          <button class="btn btn-primary" id="next5">Next »</button>
+        </div>
+      </div>  -->
+
+
+      <!-- Step 5: Hosting -->
+<div class="form-step" id="step5">
+  <h2>Step 5: Hosting</h2>
+
+  <div class="note">
+    <strong>What is Hosting?</strong><br>
+    Hosting is where your website lives on the internet. It's like renting space online so people can visit your site 24/7.
+  </div><BR>
+
+  <div class="note">
+    <strong>Included with Our Hosting:</strong><br>
+    • 1st Year FREE<br>
+    • Server & Website Maintenance<br>
+    • Technical Support with Renewal
+  </div><br>
+
+  <div class="note">
+    <strong>Renewal Fee:</strong> 100 KD/year (starting from the 2nd year)
+  </div><br>
+
+  <div class="question"><strong>Do you need Hosting?</strong></div>
+
+  <div class="options">
+    <label class="option-box">
+      <input type="radio" name="hosting" value="yes">
+      Yes, I want hosting (Free for 1st year, 100 KD/year after)
+    </label>
+    <label class="option-box">
+      <input type="radio" name="hosting" value="no" checked>
+      No, I have my own hosting
+    </label>
+  </div>
+
+  <div class="btn-group">
+    <button class="btn btn-secondary" id="prev5">« Previous</button>
+    <button class="btn btn-primary" id="next5">Next »</button>
+  </div>
+</div>
+
+      <!-- Step 6: Email Service -->
+   <!--   <div class="form-step" id="step6">
+        <h2>Step 6: Email Service</h2>
+        <div class="options">
+          <label><input type="radio" name="emailService" value="none" checked> No Email</label>
+          <label><input type="radio" name="emailService" value="ms365"> Microsoft 365</label>
+          <label><input type="radio" name="emailService" value="aws"> AWS Email</label>
+        </div>
+        <p class="note">MS365 includes Office apps; AWS is email-only.</p>
+        <div class="btn-group">
+          <button class="btn btn-secondary" id="prev6">« Previous</button>
+          <button class="btn btn-primary" id="next6">Submit</button>
+        </div>
+      </div>
+    </div>      -->
+
+
+    <!-- Step 6: Email Service -->
+<div class="form-step" id="step6">
+  <h2>Step 6: Email Service</h2>
+
+  <div class="note">
+    <strong>What is an Email Service?</strong><br>
+    Email services let you send and receive emails using your own domain (e.g., info@yourcompany.com) in a professional way.
+  </div><br>
+
+  <div class="note">
+    <strong>Options:</strong><br>
+    • <strong>Microsoft 365</strong> – Includes full Office apps (Word, Excel, Outlook, Teams etc.) + Business Email<br>
+    • <strong>AWS Email</strong> – Provides email only (no apps)<br><br>
+    Both options cover up to <strong>10 users/year</strong>. Adding more users may increase cost.
+  </div><br>
+
+  <div class="note">
+    <strong>Estimated Pricing:</strong><br>
+    • Microsoft 365: Approx. 600 KD/year for 10 users<br>
+    • AWS Email: Approx. 120 KD/year for 10 users
+  </div><br>
+
+  <div class="question"><strong>Do you need Email Services from us?</strong></div><br>
+
+  <div class="options">
+    <label class="option-box">
+      <input type="radio" name="emailService" value="none" checked>
+      No Email Needed
+    </label>
+    <label class="option-box">
+      <input type="radio" name="emailService" value="ms365">
+      Microsoft 365 – Full Suite + Email (10 users)
+    </label>
+    <label class="option-box">
+      <input type="radio" name="emailService" value="aws">
+      AWS Email – Email Only (10 users)
+    </label>
+  </div>
+
+  <div class="btn-group">
+    <button class="btn btn-secondary" id="prev6">« Previous</button>
+    <button class="btn btn-primary" id="next6">Submit</button>
+  </div>
+</div>
+
+
+    <!--Live preview-->
+    <aside class="preview-section">
+      <h2>Live Preview</h2>
+      <div id="previewInvoice">
+        <h3 id="invCompanyName">Your Company Name</h3>
+        <p><strong>Prepared by:</strong> <span id="invUserName">Your Name</span> | <span id="invUserContact">Your Email | Your Phone</span></p>
+        <div id="invLogoContainer"><img id="invLogo" alt="Logo" style="width:150px;height:100px;display:none;"/></div>
+        <p id="invCompanyContact"></p>
+        <hr />
+        <p><strong>Type:</strong> <span id="invType">-</span></p>
+        <p><strong>Primary Color:</strong> <span id="invPrimaryColor">-</span></p>
+
+        <p id="invTemplateLine" style="display:none;"><strong>Template:</strong> <span id="invTemplate">-</span></p>
+        <p id="invFeaturesLine" style="display:none;"><strong>Features:</strong> <span id="invFeatures">None</span></p>
+        <p><strong>Hosting:</strong> <span id="invHostingSummary">No</span></p>
+        <p><strong>Email:</strong> <span id="invEmailSummary">None</span></p>
+        <hr />
+        <p id="invoiceDatePreview"></p>
+        <h3>Total: <span id="invTotal">0</span> KD</h3>
+        <p class="salesperson-line" style="display:none;">Salesperson: <span id="invSalesperson"></span></p>
+      </div>
+    </aside>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
