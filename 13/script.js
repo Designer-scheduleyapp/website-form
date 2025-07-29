@@ -230,6 +230,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // (continue with your Web3Forms submission logic)
   });
   
+  document.getElementById('prev2').addEventListener('click', () => showStep(1));
+  document.getElementById('prev3').addEventListener('click', () => showStep(2));
+  document.getElementById('prev4').addEventListener('click', () => showStep(3));
+  document.getElementById('prev5').addEventListener('click', () => showStep(4));
+  document.getElementById('prev6').addEventListener('click', () => showStep(5));
+
 
 
   // Submit: Print + Email
