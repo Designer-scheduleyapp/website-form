@@ -96,14 +96,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
   function refreshFeatures() {
-    const selected = [...document.querySelectorAll('.feature-option.selected')]
-      .map(el => el.dataset.value);
+    const selected = [];
+  
+    document.querySelectorAll('.feature-option.selected').forEach(el => {
+      const keywords = el.dataset.value.split(',').map(k => k.trim());
+      selected.push(...keywords); // push each keyword separately
+    });
+  
     if (refs.featureOtherText.value.trim()) {
-      selected.push(refs.featureOtherText.value.trim());
+      const others = refs.featureOtherText.value.split(',').map(f => f.trim()).filter(Boolean);
+      selected.push(...others);
+
     }
+  
     preview.invFeatures.innerText = selected.length ? selected.join(', ') : 'None';
     preview.invFeaturesLine.style.display = selected.length ? 'block' : 'none';
   }
+  
   function showStep(n) {
     document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
     document.getElementById('step' + n).classList.add('active');
