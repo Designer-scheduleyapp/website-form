@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function validateStep(stepNumber) {
     const step = document.getElementById(`step${stepNumber}`);
     let valid = true;
+  
     // 1. Validate required inputs
     step.querySelectorAll('input[required]').forEach(input => {
       const isEmpty = input.type === 'file'
@@ -54,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
       input.style.border = isEmpty ? '2px solid red' : '';
       if (isEmpty) valid = false;
     });
+  
     // 2. Validate radio groups
     const radios = step.querySelectorAll('input[type="radio"]');
     if (radios.length) {
@@ -63,7 +65,36 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!selected) valid = false;
       });
     }
-    // 3. Step 3: Features
+  
+    // 3. Step 1: Email and Phone validations
+    if (stepNumber === 1) {
+      const emailFields = [refs.companyEmail, refs.userEmail];
+      const phoneFields = [refs.companyPhone, refs.userPhone];
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const phoneRegex = /^\d{8}$/;
+  
+      let allValid = true;
+  
+      emailFields.forEach(field => {
+        const isValid = emailRegex.test(field.value.trim());
+        field.style.borderColor = isValid ? '#ccc' : 'red';
+        if (!isValid) allValid = false;
+      });
+  
+      phoneFields.forEach(field => {
+        const numbersOnly = field.value.replace(/\D/g, '');
+        const isValid = phoneRegex.test(numbersOnly);
+        field.style.borderColor = isValid ? '#ccc' : 'red';
+        if (!isValid) allValid = false;
+      });
+  
+      if (!allValid) {
+        alert('Please enter valid email addresses and 8-digit phone numbers.');
+        return false;
+      }
+    }
+  
+    // 4. Step 3: Feature selection
     if (stepNumber === 3) {
       const selectedFeatures = step.querySelectorAll('.feature-option.selected');
       const other = document.getElementById('featureOtherText');
@@ -74,7 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
         other.style.border = '';
       }
     }
-    // 4. Step 4: Template selection
+  
+    // 5. Step 4: Template selection (only if Quick selected)
     if (stepNumber === 4) {
       const siteType = document.querySelector('input[name="siteType"]:checked').value;
       if (siteType === 'quick') {
@@ -85,8 +117,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
+  
     return valid;
   }
+  
   // Feature selection grid logic
   const featureEls = document.querySelectorAll('.feature-option');
   featureEls.forEach(el => {
@@ -178,9 +212,34 @@ document.addEventListener('DOMContentLoaded', () => {
   
 
   // Templates
-  document.querySelectorAll('.preview-template').forEach(btn => btn.addEventListener('click', e => {
+  /*  document.querySelectorAll('.preview-template').forEach(btn => btn.addEventListener('click', e => {
     window.open(e.target.closest('.template-option').dataset.previewUrl, '_blank').focus();
-  }));
+  }));  */
+
+  document.querySelectorAll('.preview-template').forEach(btn => {
+    let zoomed = false;
+  
+    btn.addEventListener('click', e => {
+      const template = e.target.closest('.template-option');
+      const image = template.querySelector('.template-thumb');
+  
+      if (!zoomed) {
+        image.classList.add('zoomed');
+        zoomed = true;
+  
+        // Automatically reset zoom after 4 seconds (optional)
+        setTimeout(() => {
+          image.classList.remove('zoomed');
+          zoomed = false;
+        }, 4000);
+      } else {
+        const url = template.dataset.previewUrl;
+        if (url) window.open(url, '_blank').focus();
+      }
+    });
+  });
+  
+  
   document.querySelectorAll('.select-template').forEach(btn => btn.addEventListener('click', e => {
     document.querySelectorAll('.template-option').forEach(div => div.classList.remove('selected'));
     const opt = e.target.closest('.template-option');
@@ -372,3 +431,39 @@ selectedFeatures.push(...others);
   refs.emailServiceRadios[0].dispatchEvent(new Event('change'));
   refreshFeatures();
 });
+
+document.querySelectorAll('.template-option').forEach(template => {
+  let isTouch = false;
+
+  // Detect touch device on first interaction
+  window.addEventListener('touchstart', () => {
+    isTouch = true;
+  }, { once: true });
+
+  // On click (for mobile)
+  template.addEventListener('click', e => {
+    if (isTouch) {
+      const thumb = template.querySelector('.template-thumb');
+      const alreadyZoomed = template.classList.contains('hovered');
+
+      // If already zoomed, allow link to open
+      if (alreadyZoomed) {
+        template.classList.remove('hovered');
+        return;
+      }
+
+      // Zoom in and prevent link navigation
+      e.preventDefault();
+      document.querySelectorAll('.template-option.hovered').forEach(el => el.classList.remove('hovered'));
+      template.classList.add('hovered');
+    }
+  });
+});
+
+
+[...document.querySelectorAll('input')].forEach(input => {
+  input.addEventListener('input', () => {
+    input.style.borderColor = '#ccc';
+  });
+});
+
