@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function validateStep(stepNumber) {
     const step = document.getElementById(`step${stepNumber}`);
     let valid = true;
+  
     // 1. Validate required inputs
     step.querySelectorAll('input[required]').forEach(input => {
       const isEmpty = input.type === 'file'
@@ -54,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
       input.style.border = isEmpty ? '2px solid red' : '';
       if (isEmpty) valid = false;
     });
+  
     // 2. Validate radio groups
     const radios = step.querySelectorAll('input[type="radio"]');
     if (radios.length) {
@@ -63,7 +65,36 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!selected) valid = false;
       });
     }
-    // 3. Step 3: Features
+  
+    // 3. Step 1: Email and Phone validations
+    if (stepNumber === 1) {
+      const emailFields = [refs.companyEmail, refs.userEmail];
+      const phoneFields = [refs.companyPhone, refs.userPhone];
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const phoneRegex = /^\d{8}$/;
+  
+      let allValid = true;
+  
+      emailFields.forEach(field => {
+        const isValid = emailRegex.test(field.value.trim());
+        field.style.borderColor = isValid ? '#ccc' : 'red';
+        if (!isValid) allValid = false;
+      });
+  
+      phoneFields.forEach(field => {
+        const numbersOnly = field.value.replace(/\D/g, '');
+        const isValid = phoneRegex.test(numbersOnly);
+        field.style.borderColor = isValid ? '#ccc' : 'red';
+        if (!isValid) allValid = false;
+      });
+  
+      if (!allValid) {
+        alert('Please enter valid email addresses and 8-digit phone numbers.');
+        return false;
+      }
+    }
+  
+    // 4. Step 3: Feature selection
     if (stepNumber === 3) {
       const selectedFeatures = step.querySelectorAll('.feature-option.selected');
       const other = document.getElementById('featureOtherText');
@@ -74,7 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
         other.style.border = '';
       }
     }
-    // 4. Step 4: Template selection
+  
+    // 5. Step 4: Template selection (only if Quick selected)
     if (stepNumber === 4) {
       const siteType = document.querySelector('input[name="siteType"]:checked').value;
       if (siteType === 'quick') {
@@ -85,8 +117,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
+  
     return valid;
   }
+  
   // Feature selection grid logic
   const featureEls = document.querySelectorAll('.feature-option');
   featureEls.forEach(el => {
@@ -99,8 +133,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const selected = [];
   
     document.querySelectorAll('.feature-option.selected').forEach(el => {
-      const keywords = el.dataset.value.split(',').map(k => k.trim());
-      selected.push(...keywords); // push each keyword separately
+    //  const keywords = el.dataset.value.split(',').map(k => k.trim());
+      //selected.push(...keywords); // push each keyword separately
+      const label = el.dataset.label || el.innerText.trim(); // fallback to visible text
+      selected.push(label);
     });
   
     if (refs.featureOtherText.value.trim()) {
