@@ -214,9 +214,32 @@ document.addEventListener('DOMContentLoaded', () => {
   
 
   // Templates
-  document.querySelectorAll('.preview-template').forEach(btn => btn.addEventListener('click', e => {
+  /*  document.querySelectorAll('.preview-template').forEach(btn => btn.addEventListener('click', e => {
     window.open(e.target.closest('.template-option').dataset.previewUrl, '_blank').focus();
-  }));
+  }));  */
+
+  document.querySelectorAll('.preview-template').forEach(btn => {
+    let zoomed = false;
+  
+    btn.addEventListener('click', e => {
+      const template = e.target.closest('.template-option');
+      const image = template.querySelector('.template-thumb');
+  
+      if (!zoomed) {
+        image.classList.add('zoomed');
+        zoomed = true;
+  
+        // Automatically reset zoom after 4 seconds (optional)
+        setTimeout(() => {
+          image.classList.remove('zoomed');
+          zoomed = false;
+        }, 4000);
+      } else {
+        const url = template.dataset.previewUrl;
+        if (url) window.open(url, '_blank').focus();
+      }
+    });
+  });
   document.querySelectorAll('.select-template').forEach(btn => btn.addEventListener('click', e => {
     document.querySelectorAll('.template-option').forEach(div => div.classList.remove('selected'));
     const opt = e.target.closest('.template-option');
@@ -407,4 +430,32 @@ selectedFeatures.push(...others);
   refs.hostingRadios[1].dispatchEvent(new Event('change'));
   refs.emailServiceRadios[0].dispatchEvent(new Event('change'));
   refreshFeatures();
+});
+
+document.querySelectorAll('.template-option').forEach(template => {
+  let isTouch = false;
+
+  // Detect touch device on first interaction
+  window.addEventListener('touchstart', () => {
+    isTouch = true;
+  }, { once: true });
+
+  // On click (for mobile)
+  template.addEventListener('click', e => {
+    if (isTouch) {
+      const thumb = template.querySelector('.template-thumb');
+      const alreadyZoomed = template.classList.contains('hovered');
+
+      // If already zoomed, allow link to open
+      if (alreadyZoomed) {
+        template.classList.remove('hovered');
+        return;
+      }
+
+      // Zoom in and prevent link navigation
+      e.preventDefault();
+      document.querySelectorAll('.template-option.hovered').forEach(el => el.classList.remove('hovered'));
+      template.classList.add('hovered');
+    }
+  });
 });

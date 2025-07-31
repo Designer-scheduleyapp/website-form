@@ -106,3 +106,23 @@ input[type="checkbox"]:hover { border-color: var(--primary); }
 .option-box[title] {
   cursor: help;
 }
+
+.template-thumb.zoomed {
+  transform: scale(2);
+  transition: transform 0.3s ease;
+  z-index: 100;
+  position: relative;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.template-thumb {
+  transition: transform 0.3s ease;
+}
+
+.template-option.hovered .template-thumb {
+  transform: scale(2);
+  z-index: 10;
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
