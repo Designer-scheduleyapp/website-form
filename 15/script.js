@@ -133,8 +133,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const selected = [];
   
     document.querySelectorAll('.feature-option.selected').forEach(el => {
-      const keywords = el.dataset.value.split(',').map(k => k.trim());
-      selected.push(...keywords); // push each keyword separately
+     // const keywords = el.dataset.value.split(',').map(k => k.trim());
+      // selected.push(...keywords); // push each keyword separately
+      const label = el.dataset.label || el.innerText.trim(); // fallback to visible text
+      selected.push(label);
     });
   
     if (refs.featureOtherText.value.trim()) {
