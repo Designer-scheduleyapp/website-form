@@ -9,7 +9,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head> 
-<body>
+<body> 
   <h1>Website Requirements Form</h1>
   <div class="container">
     <div class="form-section">
@@ -323,29 +323,41 @@
         </div><br>
         <div class="note">
           <strong>Options:</strong><br>
-          • <strong>Microsoft 365</strong> – Includes full Office apps (Word, Excel, Outlook, Teams etc.) + Business Email<br>
-          • <strong>AWS Email</strong> – Provides email only (no apps)<br><br>
-          Both options cover up to <strong>10 users/year</strong>. Adding more users may increase cost.
+          • <strong>Microsoft 365 – Full Suite</strong> – Includes Office apps (Word, Excel, Outlook, Teams, etc.) + Business Email<br>
+          • <strong>Microsoft 365 – Email Only</strong> – Provides business email only, no apps<br>
+          • <strong>AWS Email</strong> – Provides business emails only (no apps)<br><br>
+          All options cover up to <strong>10 users/year</strong>. Adding more users may increase cost.
         </div><br>
+        
         <div class="note">
           <strong>Estimated Pricing:</strong><br>
-          • Microsoft 365: Approx. 600 KD/year for 10 users<br>
-          • AWS Email: Approx. 120 KD/year for 10 users
+          • Microsoft 365 – Full Suite: Approx. 480 KD/year for 10 users<br>
+          • Microsoft 365 – Email Only: Approx. 320 KD/year for 10 users<br>
+          • AWS Email: Approx. 320 KD/year for 10 users
         </div><br>
+        
         <div class="question"><strong>Do you need Email Services from us?</strong></div><br>
         <div class="options">
           <label class="option-box">
             <input type="radio" name="emailService" value="none" checked>
             No Email Needed
           </label>
+
           <label class="option-box">
             <input type="radio" name="emailService" value="ms365">
             Microsoft 365 – Full Suite + Email (10 users)
           </label>
+
+          <label class="option-box">
+            <input type="radio" name="emailService" value="ms365-email">
+            Microsoft 365 – Email Only (10 users)
+          </label>
+          
           <label class="option-box">
             <input type="radio" name="emailService" value="aws">
             AWS Email – Email Only (10 users)
           </label>
+
         </div><br><br>
 
         <div class="question"><label for="extraNotes">Do you have any additional notes or comments?</label><br>

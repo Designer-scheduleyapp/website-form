@@ -2,8 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const PRICE_QUICK = 350,
         PRICE_CUSTOM = 1000,
         PRICE_HOSTING = 0,
-        PRICE_EMAIL_MS365 = 600,
-        PRICE_EMAIL_AWS = 120;
+        PRICE_EMAIL_MS365 = 480,
+        PRICE_EMAIL_MS365_EMAIL_ONLY = 320,
+        PRICE_EMAIL_AWS = 320;
   let siteTypeCost = 0, hostingSelected = false, selectedEmail = 'none', selectedTemplate = null;
   const refs = {
     companyName: document.getElementById('companyName'),
@@ -157,9 +158,21 @@ document.addEventListener('DOMContentLoaded', () => {
     preview.invoiceDate.innerText = 'Date: ' + new Date().toLocaleDateString();
   }
   function updateTotal() {
-    let total = siteTypeCost +
-      (hostingSelected ? PRICE_HOSTING : 0) +
-      (selectedEmail === 'ms365' ? PRICE_EMAIL_MS365 : selectedEmail === 'aws' ? PRICE_EMAIL_AWS : 0);
+    //let total = siteTypeCost +
+     // (hostingSelected ? PRICE_HOSTING : 0) +
+     // (selectedEmail === 'ms365' ? PRICE_EMAIL_MS365 : selectedEmail === 'aws' ? PRICE_EMAIL_AWS : 0);
+
+     let emailCost = 0;
+if (selectedEmail === 'ms365') {
+  emailCost = PRICE_EMAIL_MS365;
+} else if (selectedEmail === 'ms365-email') {
+  emailCost = PRICE_EMAIL_MS365_EMAIL_ONLY;
+} else if (selectedEmail === 'aws') {
+  emailCost = PRICE_EMAIL_AWS;
+}
+
+let total = siteTypeCost + (hostingSelected ? PRICE_HOSTING : 0) + emailCost;
+
     preview.invTotal.innerText = total;
   }
   // Inputs → preview
@@ -357,11 +370,29 @@ selectedFeatures.push(...others);
     preview.invHostingSummary.innerText = r.nextSibling.textContent.trim();
     updateTotal();
   }));
-  refs.emailServiceRadios.forEach(r => r.addEventListener('change', () => {
+
+ /* refs.emailServiceRadios.forEach(r => r.addEventListener('change', () => {
     selectedEmail = r.value;
     preview.invEmailSummary.innerText = r.nextSibling.textContent.trim();
     updateTotal();
+  }));  */
+
+  refs.emailServiceRadios.forEach(r => r.addEventListener('change', () => {
+    selectedEmail = r.value;
+  
+    let label = r.nextSibling.textContent.trim();
+    let price = 0;
+  
+    if (selectedEmail === 'ms365') price = PRICE_EMAIL_MS365;
+    else if (selectedEmail === 'ms365-email') price = PRICE_EMAIL_MS365_EMAIL_ONLY;
+    else if (selectedEmail === 'aws') price = PRICE_EMAIL_AWS;
+  
+    preview.invEmailSummary.innerText = label + (price ? ` – ${price} KD` : '');
+  
+    updateTotal();
   }));
+  
+
   document.getElementById('next1').addEventListener('click', () => {
     if (validateStep(1)) showStep(2);
   });
