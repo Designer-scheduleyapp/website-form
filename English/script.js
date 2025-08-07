@@ -3,7 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('langToggle').addEventListener('change', function () {
     if (this.checked) {
       // Go to Arabic version
-      location.href = 'Arabic/index.html';
+     // location.href = 'Arabic/index.html';
+
+      const currentPath = window.location.pathname;
+const base = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+location.href = base + 'Arabic/index.html';
+
     }
   });
 
