@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>نموذج متطلبات الموقع الإلكتروني</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- jsPDF for PDF generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head> 
+<body> 
+  <h1>نموذج متطلبات الموقع الإلكتروني</h1>
+  <div class="container">
+    <div class="form-section">
+      <!-- Step 1: Company & Your Information -->
+      <div class="form-step active" id="step1">
+        <h2>الخطوة ١: معلومات الشركة ومعلوماتك</h2>
+        <!-- Company fields -->
+        <div class="question"><label>اسم الشركة<input type="text" id="companyName" placeholder="اسم الشركة" required></label></div>
+        <div class="question"><label>إيميل الشركة<input type="email" id="companyEmail" placeholder="اسم@الشركة.com" required></label></div>
+        <div class="question"><label>رقم التلفون<input type="tel" id="companyPhone" placeholder="+965 xxxx-xxxx" required></label></div>
+        <div class="question"><label>مندوب المبيعات<input type="text" id="salesperson" placeholder="اسم مندوب المبيعات" required></label></div>
+        <div class="question"><label>شعار الشركة<input type="file" id="companyLogo" accept="image/*" required></label></div>
+        <hr />
+        <!-- User fields -->
+        <div class="question"><label>اسمك الكامل<input type="text" id="userName" placeholder="اسمك الكامل" required></label></div>
+        <div class="question"><label>إيميلك<input type="email" id="userEmail" placeholder="إيميلك" required></label></div>
+        <div class="question"><label>رقم تلفونك<input type="tel" id="userPhone" placeholder="+965 xxxx-xxxx" required></label></div>
+        <div class="btn-group"><button class="btn btn-primary" id="next1">التالي ←</button></div>
+      </div>
+
+      <!-- Step 2: Website Type -->
+      <div class="form-step" id="step2">
+        <h2>الخطوة ٢: نوع الموقع</h2>
+        <div class="note">
+          <strong>اختر نوع الموقع اللي تحتاجه:</strong><br>
+          • <strong>حل سريع</strong> : قالب جاهز مع تعديلات بسيطة، مثالي للتسليم السريع (التسليم المتوقع خلال ٧ إلى ١٠ أيام عمل بحوالي ٣٥٠ د.ك)<br>
+          • <strong>تصميم مخصص</strong> : تصميم مخصص بالكامل مبني من الصفر ليناسب احتياجاتك بالضبط (التسليم المتوقع خلال ٣ إلى ٦ أسابيع بحوالي ١٠٠٠ د.ك)
+        </div><br>
+        <div class="note">
+          الأسعار تقريبية. التكلفة النهائية ممكن تتغير حسب المميزات والمتطلبات.
+        </div><br>
+        <p class="note" style="margin-top: 10px;">
+          تبي تفاصيل أكثر؟ <a href="Website Development Packages Report.pdf" download target="_blank" style="color: var(--primary); text-decoration: underline;">اضغط هنا لتنزيل المعلومات الكاملة</a>.
+        </p>
+        <div class="question"><strong>شنو نوع الموقع اللي تحتاجه؟</strong></div><br>
+        <div class="options">
+          <label class="option-box" title="قالب جاهز، تسليم سريع">
+            <input type="radio" name="siteType" value="quick" checked>
+            حل سريع (٣٥٠ د.ك)
+          </label>
+          <label class="option-box" title="تصميم مخصص بالكامل، فريد من نوعه">
+            <input type="radio" name="siteType" value="custom">
+            موقع مخصص (١٠٠٠ د.ك)
+          </label>
+        </div>
+        <div class="question" style="margin-top: 20px;">
+          اختر اللون الأساسي المفضل لموقعك:
+        </div>
+        <div class="color-picker" style="margin-top: 8px;">
+          <input type="color" id="primaryColor" name="primaryColor" value="#20285D" style="width: 60px; height: 40px; border: none; cursor: pointer;" required>
+        </div>
+        <p class="note">هذا اللون راح ينستخدم كلون أساسي في الموقع (مثلاً بالأزرار والعناوين).</p>
+        <div class="btn-group">
+          <button class="btn btn-secondary" id="prev2">→ السابق</button>
+          <button class="btn btn-primary" id="next2">التالي ←</button>
+        </div>
+      </div>
+      <!-- Step 3: Features -->
+      <div class="form-step" id="step3">
+        <h2>الخطوة ٣: المميزات</h2>
+        <div class="question">اختر المميزات اللي تبيها في الموقع:</div>
+        <div class="features-grid">
+          <div class="feature-option" data-value="من نحن, عن الشركة" data-label="من نحن">من نحن</div>
+          <div class="feature-option" data-value="وظائف, توظيف, فرص عمل" data-label="الوظائف">الوظائف</div>
+          <div class="feature-option" data-value="اتصال, تواصل, نموذج الاتصال" data-label="نموذج الاتصال">نموذج الاتصال</div>
+          <div class="feature-option" data-value="النشرة البريدية" data-label="النشرة البريدية">النشرة البريدية</div>
+          <div class="feature-option" data-value="دخول, تسجيل, تسجيل دخول" data-label="تسجيل دخول المستخدم">تسجيل دخول المستخدم</div>
+          <div class="feature-option" data-value="سلة, سلة التسوق, عربة التسوق" data-label="سلة التسوق">سلة التسوق</div>
+          <div class="feature-option" data-value="معرض, معرض الصور" data-label="معرض الصور">معرض الصور</div>
+          <div class="feature-option" data-value="خدمات, خدماتنا" data-label="خدماتنا">خدماتنا</div>
+          <div class="feature-option" data-value="منتجات, منتجاتنا" data-label="المنتجات">المنتجات</div>
+          <div class="feature-option" data-value="متجر, متجر إلكتروني" data-label="متجر إلكتروني">متجر إلكتروني</div>
+          <div class="feature-option" data-value="خريطة, خريطة الموقع, موقع" data-label="الموقع على الخريطة">الموقع على الخريطة</div>
+          <div class="feature-option" data-value="عملاء, عملائنا" data-label="عملائنا">عملائنا</div>
+          <div class="feature-option" data-value="رسوم, رسوم بيانية, بيانية" data-label="الرسوم البيانية">الرسوم البيانية</div>
+          <div class="feature-option" data-value="أسئلة, أسئلة شائعة, الأسئلة الشائعة" data-label="الأسئلة الشائعة">الأسئلة الشائعة</div>
+        </div>
+        <div class="question"><label>أخرى:<input type="text" id="featureOtherText" placeholder="مثلاً: مساعدة، معرض، مدونة..."></label></div>
+        <div class="btn-group">
+          <button class="btn btn-secondary" id="prev3">→ السابق</button>
+          <button class="btn btn-primary" id="next3">التالي ←</button>
+        </div>
+      </div>
+      <!-- Step 4: Templates -->
+      <div class="form-step" id="step4">
+        <h2>الخطوة ٤: اختر قالب</h2>
+        <div id="templateFilters" style="margin-bottom: 15px;">
+          <span id="filterMessage" class="note"></span>
+          <a href="#" id="adjustFilters" style="color: var(--primary); text-decoration: underline; margin-left: 10px; cursor: pointer; font-style: italic; font-size: 0.9em;">تعديل المميزات</a>
+          <button type="button" id="clearFilters" class="btn btn-secondary" style="margin-left: 10px;">مسح الفلاتر</button>
+        </div>
+        <div class="template-grid">
+          <div class="template-option" data-template-id="1" data-preview-url="https://nunforest.com/koad-demo/?storefront=envato-elements" data-features="الرئيسية, قائمة الطعام, الحجز, من نحن, آراء العملاء, معرض الصور, اتصل بنا">
+            <img class="template-thumb" src="pngs/1.png" alt="قالب 1" style="max-width: 200px; height: auto;">
+            <div class="template-desc">الرئيسية، قائمة الطعام، الحجز، من نحن، آراء العملاء، معرض الصور، اتصل بنا</div>
+            <div class="btn-group">
+              <button class="btn btn-primary select-template">اختر</button>
+              <a class="btn btn-secondary preview-template" href="https://nunforest.com/koad-demo/?storefront=envato-elements" target="_blank">معاينة</a>
+            </div>
+          </div>
+          <div class="template-option" data-template-id="2" data-preview-url="https://bestwpware.com/html/tf/duralux-demo/?storefront=envato-elements" data-features="لوحات تحكم (فاتح/غامق), تحليلات, إدارة المستخدمين, جداول, نماذج, أدوات, إعدادات">
+            <img class="template-thumb" src="pngs/2.png" alt="قالب 2" style="max-width: 200px; height: auto;">
+            <div class="template-desc">لوحات تحكم (فاتح/غامق)، تحليلات، إدارة المستخدمين، جداول، نماذج، أدوات، إعدادات</div>
+            <div class="btn-group">
+              <button class="btn btn-primary select-template">اختر</button>
+              <a class="btn btn-secondary preview-template" href="https://bestwpware.com/html/tf/duralux-demo/?storefront=envato-elements" target="_blank">معاينة</a>
+            </div>
+          </div>
+          <div class="template-option" data-template-id="3" data-preview-url="https://html.creativegigstf.com/charles/?storefront=envato-elements" data-features="الرئيسية, أعمالنا, دراسات حالة, من نحن, خدماتنا, آراء العملاء, المدونة, اتصل بنا">
+            <img class="template-thumb" src="pngs/3.png" alt="قالب 3" style="max-width: 200px; height: auto;">
+            <div class="template-desc">الرئيسية، أعمالنا، دراسات حالة، من نحن، خدماتنا، آراء العملاء، المدونة، اتصل بنا</div>
+            <div class="btn-group">
+              <button class="btn btn-primary select-template">اختر</button>
+              <a class="btn btn-secondary preview-template" href="https://html.creativegigstf.com/charles/?storefront=envato-elements" target="_blank">معاينة</a>
+            </div>
+          </div>
+          <div class="template-option" data-template-id="4" data-preview-url="https://html.merku.love/axial/?storefront=envato-elements" data-features="الرئيسية, خدماتنا, مشاريع, فريق العمل, آراء العملاء, من نحن, اتصل بنا">
+            <img class="template-thumb" src="pngs/4.png" alt="قالب 4" style="max-width: 200px; height: auto;">
+            <div class="template-desc">الرئيسية (٢)، خدماتنا، مشاريع، فريق العمل، آراء العملاء، من نحن، اتصل بنا</div>
+            <div class="btn-group">
+              <button class="btn btn-primary select-template">اختر</button>
+              <a class="btn btn-secondary preview-template" href="https://html.merku.love/axial/?storefront=envato-elements" target="_blank">معاينة</a>
+            </div>
+          </div>
+          <div class="template-option" data-template-id="5" data-preview-url="https://template.hasthemes.com/hurst-v1/tf.html?storefront=envato-elements" data-features="الرئيسية, المتجر, تفاصيل المنتج, السلة, الدفع, قائمة الرغبات, المدونة, اتصل بنا">
+            <img class="template-thumb" src="pngs/5.png" alt="قالب 5" style="max-width: 200px; height: auto;">
+            <div class="template-desc">الرئيسية (٢)، المتجر، تفاصيل المنتج، السلة، الدفع، قائمة الرغبات، المدونة، اتصل بنا</div>
+            <div class="btn-group">
+              <button class="btn btn-primary select-template">اختر</button>
+              <a class="btn btn-secondary preview-template" href="https://template.hasthemes.com/hurst-v1/tf.html?storefront=envato-elements" target="_blank">معاينة</a>
+            </div>
+          </div>
+          <div class="template-option" data-template-id="6" data-preview-url="https://demo.bosathemes.com/html/travele/?storefront=envato-elements" data-features="الرئيسية, قائمة الجولات, تفاصيل الجولة, من نحن, الوجهات, الحجز, المدونة, معرض الصور, اتصل بنا">
+            <img class="template-thumb" src="pngs/6.png" alt="قالب 6" style="max-width: 200px; height: auto;">
+            <div class="template-desc">الرئيسية، قائمة الجولات، تفاصيل الجولة، من نحن، الوجهات، الحجز، المدونة، معرض الصور، اتصل بنا</div>
+            <div class="btn-group">
+              <button class="btn btn-primary select-template">اختر</button>
+              <a class="btn btn-secondary preview-template" href="https://demo.bosathemes.com/html/travele/?storefront=envato-elements" target="_blank">معاينة</a>
+            </div>
+          </div>
+          <div class="template-option" data-template-id="7" data-preview-url="https://glamics.temptics.com/?storefront=envato-elements" data-features="الرئيسية, المتجر, تفاصيل المنتج, السلة, قائمة الرغبات, الحساب, من نحن, المدونة, اتصل بنا">
+            <img class="template-thumb" src="pngs/7.png" alt="قالب 7" style="max-width: 200px; height: auto;">
+            <div class="template-desc">الرئيسية، المتجر، تفاصيل المنتج، السلة، قائمة الرغبات، الحساب، من نحن، المدونة، اتصل بنا</div>
+            <div class="btn-group">
+              <button class="btn btn-primary select-template">اختر</button>
+              <a class="btn btn-secondary preview-template" href="https://glamics.temptics.com/?storefront=envato-elements" target="_blank">معاينة</a>
+            </div>
+          </div>
+          <div class="template-option" data-template-id="8" data-preview-url="https://zoyothemes.com/tailwind/evea/cakephp?storefront=envato-elements" data-features="الرئيسية (٦+), المميزات, معرض الصور, الأسعار, آراء العملاء, معلومات عنا, CTA, اتصل بنا">
+            <img class="template-thumb" src="pngs/8.png" alt="قالب 8" style="max-width: 200px; height: auto;">
+            <div class="template-desc">الرئيسية (٦+)، المميزات، معرض الصور، الأسعار، آراء العملاء، معلومات عنا، CTA، اتصل بنا</div>
+            <div class="btn-group">
+              <button class="btn btn-primary select-template">اختر</button>
+              <a class="btn btn-secondary preview-template" href="https://zoyothemes.com/tailwind/evea/cakephp?storefront=envato-elements" target="_blank">معاينة</a>
+            </div>
+          </div>
+          <div class="template-option" data-template-id="9" data-preview-url="https://ex-coders.com/html/niotech/?storefront=envato-elements" data-features="الرئيسية, المميزات, معرض الصور, الأسعار, آراء العملاء, فريق العمل, اتصل بنا, CTA">
+            <img class="template-thumb" src="pngs/9.png" alt="قالب 9" style="max-width: 200px; height: auto;">
+            <div class="template-desc">الرئيسية، المميزات، معرض الصور، الأسعار، آراء العملاء، فريق العمل، اتصل بنا، CTA</div>
+            <div class="btn-group">
+              <button class="btn btn-primary select-template">اختر</button>
+              <a class="btn btn-secondary preview-template" href="https://ex-coders.com/html/niotech/?storefront=envato-elements" target="_blank">معاينة</a>
+            </div>
+          </div>
+          <div class="template-option" data-template-id="10" data-preview-url="https://pixydrops.com/infetech/?storefront=envato-elements" data-features="الرئيسية (٥), خدماتنا, المشاريع, الأسعار, فريق العمل, آراء العملاء, المدونة, اتصل بنا">
+            <img class="template-thumb" src="pngs/10.png" alt="قالب 10" style="max-width: 200px; height: auto;">
+            <div class="template-desc">الرئيسية (٥)، خدماتنا، المشاريع، الأسعار، فريق العمل، آراء العملاء، المدونة، اتصل بنا</div>
+            <div class="btn-group">
+              <button class="btn btn-primary select-template">اختر</button>
+              <a class="btn btn-secondary preview-template" href="https://pixydrops.com/infetech/?storefront=envato-elements" target="_blank">معاينة</a>
+            </div>
+          </div>
+          <div class="template-option" data-template-id="11" data-preview-url="https://themegenix.net/html/suxnix-preview/?storefront=envato-elements" data-features="الرئيسية, المتجر, تفاصيل المنتج, المميزات, الأسئلة الشائعة, المدونة, اتصل بنا">
+            <img class="template-thumb" src="pngs/11.png" alt="قالب 11" style="max-width: 200px; height: auto;">
+            <div class="template-desc">الرئيسية، المتجر، تفاصيل المنتج، المميزات، الأسئلة الشائعة، المدونة، اتصل بنا</div>
+            <div class="btn-group">
+              <button class="btn btn-primary select-template">اختر</button>
+              <a class="btn btn-secondary preview-template" href="https://themegenix.net/html/suxnix-preview/?storefront=envato-elements" target="_blank">معاينة</a>
+            </div>
+          </div>
+          <div class="template-option" data-template-id="12" data-preview-url="https://demo.epic-webdesign.com/tf-fable/demo/?storefront=envato-elements" data-features="الرئيسية, القائمة, من نحن, معرض الصور, الحجز, المدونة, اتصل بنا">
+            <img class="template-thumb" src="pngs/12.png" alt="قالب 12" style="max-width: 200px; height: auto;">
+            <div class="template-desc">الرئيسية، القائمة، من نحن، معرض الصور، الحجز، المدونة، اتصل بنا</div>
+            <div class="btn-group">
+              <button class="btn btn-primary select-template">اختر</button>
+              <a class="btn btn-secondary preview-template" href="https://demo.epic-webdesign.com/tf-fable/demo/?storefront=envato-elements" target="_blank">معاينة</a>
+            </div>
+          </div>
+          <div class="template-option" data-template-id="13" data-preview-url="https://solverwp.com/demo/react/bizkar/?storefront=envato-elements#/" data-features="الرئيسية (٤), من نحن, خدماتنا, أعمالنا, الأسعار, المدونة, اتصل بنا">
+            <img class="template-thumb" src="pngs/13.png" alt="قالب 13" style="max-width: 200px; height: auto;">
+            <div class="template-desc">الرئيسية (٤)، من نحن، خدماتنا، أعمالنا، الأسعار، المدونة، اتصل بنا</div>
+            <div class="btn-group">
+              <button class="btn btn-primary select-template">اختر</button>
+              <a class="btn btn-secondary preview-template" href="https://solverwp.com/demo/react/bizkar/?storefront=envato-elements#/" target="_blank">معاينة</a>
+            </div>
+          </div>
+          <div class="template-option" data-template-id="14" data-preview-url="https://themazine.com/thewp/landestate/?storefront=envato-elements" data-features="الرئيسية, قائمة العقارات, تفاصيل العقار, الوكلاء, خدماتنا, المدونة, اتصل بنا">
+            <img class="template-thumb" src="pngs/14.png" alt="قالب 14" style="max-width: 200px; height: auto;">
+            <div class="template-desc">الرئيسية، قائمة العقارات، تفاصيل العقار، الوكلاء، خدماتنا، المدونة، اتصل بنا</div>
+            <div class="btn-group">
+              <button class="btn btn-primary select-template">اختر</button>
+              <a class="btn btn-secondary preview-template" href="https://themazine.com/thewp/landestate/?storefront=envato-elements" target="_blank">معاينة</a>
+            </div>
+          </div>
+          <div class="template-option" data-template-id="15" data-preview-url="https://abcgomel.ru/haswell/intro.html?storefront=envato-elements" data-features="الرئيسية (٢٠+), من نحن, أعمالنا, المدونة, المتجر, الأسئلة الشائعة, اتصل بنا, 404, قريباً">
+            <img class="template-thumb" src="pngs/15.png" alt="قالب 15" style="max-width: 200px; height: auto;">
+            <div class="template-desc">الرئيسية (٢٠+)، من نحن، أعمالنا، المدونة، المتجر، الأسئلة الشائعة، اتصل بنا، 404، قريباً</div>
+            <div class="btn-group">
+              <button class="btn btn-primary select-template">اختر</button>
+              <a class="btn btn-secondary preview-template" href="https://abcgomel.ru/haswell/intro.html?storefront=envato-elements" target="_blank">معاينة</a>
+            </div>
+          </div>
+          <div class="template-option" data-template-id="16" data-preview-url="https://demoxml.com/html/construct/?storefront=envato-elements" data-features="الرئيسية, المشاريع, خدماتنا, من نحن, المدونة, اتصل بنا">
+            <img class="template-thumb" src="pngs/16.png" alt="قالب 16" style="max-width: 200px; height: auto;">
+            <div class="template-desc">الرئيسية، المشاريع، خدماتنا، من نحن، المدونة، اتصل بنا</div>
+            <div class="btn-group">
+              <button class="btn btn-primary select-template">اختر</button>
+              <a class="btn btn-secondary preview-template" href="https://demoxml.com/html/construct/?storefront=envato-elements" target="_blank">معاينة</a>
+            </div>
+          </div>
+          <div class="template-option" data-template-id="17" data-preview-url="https://theme7x.com/shapen-preview/?storefront=envato-elements" data-features="الرئيسية (٤), خدماتنا, المشاريع, فريق العمل, المدونة, اتصل بنا">
+            <img class="template-thumb" src="pngs/17.png" alt="قالب 17" style="max-width: 200px; height: auto;">
+            <div class="template-desc">الرئيسية (٤)، خدماتنا، المشاريع، فريق العمل، المدونة، اتصل بنا</div>
+            <div class="btn-group">
+              <button class="btn btn-primary select-template">اختر</button>
+              <a class="btn btn-secondary preview-template" href="https://theme7x.com/shapen-preview/?storefront=envato-elements" target="_blank">معاينة</a>
+            </div>
+          </div>
+          <div class="template-option" data-template-id="18" data-preview-url="https://templates.thememodern.com/industris/?storefront=envato-elements" data-features="الرئيسية, من نحن, المشاريع, خدماتنا, المدونة, اتصل بنا">
+            <img class="template-thumb" src="pngs/18.png" alt="قالب 18" style="max-width: 200px; height: auto;">
+            <div class="template-desc">الرئيسية، من نحن، المشاريع، خدماتنا، المدونة، اتصل بنا</div>
+            <div class="btn-group">
+              <button class="btn btn-primary select-template">اختر</button>
+              <a class="btn btn-secondary preview-template" href="https://templates.thememodern.com/industris/?storefront=envato-elements" target="_blank">معاينة</a>
+            </div>
+          </div>
+          <div class="template-option" data-template-id="19" data-preview-url="https://templates.framework-y.com/yellowbusiness/pages/index.html?storefront=envato-elements" data-features="الرئيسية, من نحن, خدماتنا, المشاريع, إحصائيات, اتصل بنا (جاهز للمواقع العربية)">
+            <img class="template-thumb" src="pngs/19.png" alt="قالب 19" style="max-width: 200px; height: auto;">
+            <div class="template-desc">الرئيسية، من نحن، خدماتنا، المشاريع، إحصائيات، اتصل بنا (جاهز للمواقع العربية)</div>
+            <div class="btn-group">
+              <button class="btn btn-primary select-template">اختر</button>
+              <a class="btn btn-secondary preview-template" href="https://templates.framework-y.com/yellowbusiness/pages/index.html?storefront=envato-elements" target="_blank">معاينة</a>
+            </div>
+          </div>
+          <div class="template-option" data-template-id="20" data-preview-url="https://html.themexriver.com/consulting/index-two.html" data-features="الرئيسية (٧), من نحن, خدماتنا, دراسات حالة, المدونة, الأسعار, اتصل بنا">
+            <img class="template-thumb" src="pngs/20.png" alt="قالب 20" style="max-width: 200px; height: auto;">
+            <div class="template-desc">الرئيسية (٧)، من نحن، خدماتنا، دراسات حالة، المدونة، الأسعار، اتصل بنا</div>
+            <div class="btn-group">
+              <button class="btn btn-primary select-template">اختر</button>
+              <a class="btn btn-secondary preview-template" href="https://html.themexriver.com/consulting/index-two.html" target="_blank">معاينة</a>
+            </div>
+          </div>
+          <div class="btn-group" style="width: 100px; height: 50px;">
+            <button class="btn btn-secondary" id="prev4">→ السابق</button><br><br>
+            <button class="btn btn-primary" id="next4">التالي ←</button>
+          </div>
+        </div>
+      </div>
+      <!-- Step 5: Hosting -->
+      <div class="form-step" id="step5">
+        <h2>الخطوة ٥: الاستضافة</h2>
+        <div class="note">
+          <strong>شنو يعني استضافة؟</strong><br>
+          الاستضافة هي المكان اللي يعيش فيه موقعك على الإنترنت. يعني مثل أجار محل بس أونلاين عشان الناس يقدرون يزورون موقعك 24/7.
+        </div><br>
+        <div class="note">
+          <strong>تشمل الاستضافة عندنا:</strong><br>
+          • السنة الأولى مجاناً<br>
+          • صيانة السيرفر والموقع<br>
+          • دعم فني عند التجديد
+        </div><br>
+        <div class="note">
+          <strong>رسوم التجديد:</strong> ١٠٠ د.ك في السنة (ابتداءً من السنة الثانية)
+        </div><br>
+        <div class="question"><strong>تحتاج استضافة؟</strong></div>
+        <div class="options">
+          <label class="option-box">
+            <input type="radio" name="hosting" value="yes">
+            نعم، أبي استضافة (أول سنة مجاناً، بعدها ١٠٠ د.ك بالسنة)
+          </label>
+          <label class="option-box">
+            <input type="radio" name="hosting" value="no" checked>
+            لا، عندي استضافة خاصة
+          </label>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-secondary" id="prev5">→ السابق</button>
+          <button class="btn btn-primary" id="next5">التالي ←</button>
+        </div>
+      </div>
+      <!-- Step 6: Email Service -->
+      <div class="form-step" id="step6">
+        <h2>الخطوة ٦: خدمة الإيميل</h2>
+        <div class="note">
+          <strong>شنو يعني خدمة إيميل؟</strong><br>
+          خدمات الإيميل تسمح لك ترسل وتستقبل رسائل إلكترونية باستخدام دومين موقعك (مثال: info@yourcompany.com) بشكل احترافي.
+        </div><br>
+        <div class="note">
+          <strong>الخيارات:</strong><br>
+          • <strong>Microsoft 365 – الباقة الكاملة</strong> – تشمل تطبيقات أوفيس (وورد، إكسل، أوتلوك، تيمز، إلخ) + إيميل أعمال<br>
+          • <strong>Microsoft 365 – إيميل فقط</strong> – يوفر إيميل أعمال فقط، بدون تطبيقات<br>
+          • <strong>AWS إيميل</strong> – يوفر إيميلات أعمال فقط (بدون تطبيقات)<br><br>
+          كل الخيارات تغطي حتى <strong>١٠ مستخدمين في السنة</strong>. زيادة عدد المستخدمين ممكن تزيد التكلفة.
+        </div><br>
+        
+        <div class="note">
+          <strong>الأسعار التقديرية:</strong><br>
+          • Microsoft 365 – الباقة الكاملة: حوالي ٤٨٠ د.ك بالسنة لـ ١٠ مستخدمين<br>
+          • Microsoft 365 – إيميل فقط: حوالي ٣٢٠ د.ك بالسنة لـ ١٠ مستخدمين<br>
+          • AWS – إيميل فقط: حوالي ٣٢٠ د.ك بالسنة لـ ١٠ مستخدمين
+        </div><br>
+        
+        <div class="question"><strong>تحتاج خدمة إيميل منا؟</strong></div><br>
+        <div class="options">
+          <label class="option-box">
+            <input type="radio" name="emailService" value="none" checked>
+            مو محتاج إيميل
+          </label>
+
+          <label class="option-box">
+            <input type="radio" name="emailService" value="ms365">
+            مايكروسوفت ٣٦٥ – الباقة الكاملة + إيميل (١٠ مستخدمين)
+          </label>
+
+          <label class="option-box">
+            <input type="radio" name="emailService" value="ms365-email">
+            مايكروسوفت ٣٦٥ – إيميل فقط (١٠ مستخدمين)
+          </label>
+          
+          <label class="option-box">
+            <input type="radio" name="emailService" value="aws">
+            AWS – إيميل فقط (١٠ مستخدمين)
+          </label>
+
+        </div><br><br>
+
+        <div class="question"><label for="extraNotes">عندك أي ملاحظات أو تعليقات إضافية؟</label><br>
+          <textarea id="extraNotes" rows="4" placeholder="اكتب هنا..." style="max-width: 400px; max-height: 200px; padding: 8px; border-radius: 8px; border: 1px solid #ccc;"></textarea>
+        </div>
+        
+        <div class="note">
+          <strong>ملاحظة: </strong>بعد تقديم النموذج، يفضل تاخذ لقطة شاشة لمعاينة الفاتورة الحية. هذا يساعدك تحتفظ بنسخة مرئية من طلبك قبل بدء المعالجة.
+        </div><br>
+
+        <div class="btn-group">
+          <button class="btn btn-secondary" id="prev6">→ السابق</button>
+          <button class="btn btn-primary" id="next6">إرسال</button>
+        </div>
+      </div>
+      <!--Live preview-->
+      <aside class="preview-section">
+        <h2>معاينة حيّة للفاتورة</h2>
+        <div id="previewInvoice">
+          <h3 id="invCompanyName">اسم شركتك</h3>
+          <p><strong>إعداد:</strong> <span id="invUserName">اسمك</span> | <span id="invUserContact">إيميلك | تلفونك</span></p>
+          <div id="invLogoContainer"><img id="invLogo" alt="Logo" style="width:150px;height:100px;display:none;"/></div>
+          <p id="invCompanyContact"></p>
+          <hr />
+          <p><strong>النوع:</strong> <span id="invType">-</span></p>
+          <p><strong>اللون الأساسي:</strong> <span id="invPrimaryColor">-</span></p>
+          <p id="invTemplateLine" style="display:none;"><strong>القالب:</strong> <span id="invTemplate">-</span></p>
+          <p id="invFeaturesLine" style="display:none;"><strong>المميزات:</strong> <span id="invFeatures">بدون</span></p>
+          <p><strong>الاستضافة:</strong> <span id="invHostingSummary">لا</span></p>
+          <p><strong>الإيميل:</strong> <span id="invEmailSummary">بدون</span></p>
+          <p id="invExtraNoteLine" style="display: none;"><strong>ملاحظات إضافية:</strong> <span id="invExtraNotes">-</span></p>
+
+          <hr />
+          <p id="invoiceDatePreview"></p>
+          <h3>الإجمالي: <span id="invTotal">0</span> د.ك (سعر تقريبي)</h3>
+          <p class="salesperson-line" style="display:none;">مندوب المبيعات: <span id="invSalesperson"></span></p>
+        </div>
+      </aside>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
