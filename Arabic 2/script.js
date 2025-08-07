@@ -128,20 +128,46 @@ document.addEventListener('DOMContentLoaded', () => {
       refreshFeatures();
     });
   });
-  function refreshFeatures() {
+ 
+ /* function refreshFeatures() {
     const selected = [];
   
     document.querySelectorAll('.feature-option.selected').forEach(el => {
       const keywords = el.dataset.value.split(',').map(k => k.trim());
       selected.push(...keywords);
-    });
+    });   
   
     const others = refs.featureOtherText.value.split(',').map(f => f.trim()).filter(Boolean);
     selected.push(...others);
   
     preview.invFeatures.innerText = selected.length ? selected.join('، ') : 'بدون';
     preview.invFeaturesLine.style.display = selected.length ? 'block' : 'none';
-  }
+  }   */
+
+    function refreshFeatures() {
+      const selectedLabels = [];
+      const selectedKeywords = [];
+    
+      document.querySelectorAll('.feature-option.selected').forEach(el => {
+        const label = el.dataset.label || el.innerText.trim();
+        const keywords = el.dataset.value.split(',').map(k => k.trim());
+    
+        selectedLabels.push(label);
+        selectedKeywords.push(...keywords);
+      });
+    
+      const others = refs.featureOtherText.value.split(',').map(f => f.trim()).filter(Boolean);
+      selectedLabels.push(...others);
+      selectedKeywords.push(...others);
+    
+      // Show labels in invoice
+      preview.invFeatures.innerText = selectedLabels.length ? selectedLabels.join('، ') : 'بدون';
+      preview.invFeaturesLine.style.display = selectedLabels.length ? 'block' : 'none';
+    
+      // Store keywords globally for filtering
+      window._selectedKeywordsForFiltering = selectedKeywords;
+    }
+    
   
   function showStep(n) {
     document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
@@ -244,14 +270,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const siteType = document.querySelector('input[name="siteType"]:checked').value;
     const templateGrid = document.querySelector('.template-grid');
     const templates = Array.from(document.querySelectorAll('.template-option'));
+   
     let selectedFeatures = [];
     document.querySelectorAll('.feature-option.selected').forEach(el => {
       const keywords = el.dataset.value.split(',').map(k => k.trim());
       selectedFeatures.push(...keywords);
     });
     const others = refs.featureOtherText.value.split(',').map(f => f.trim()).filter(Boolean);
-    selectedFeatures.push(...others);
-  
+    selectedFeatures.push(...others);   
+
+   // let selectedFeatures = window._selectedKeywordsForFiltering || [];
+
     let message = '';
     if (siteType === 'custom') {
       templates.forEach(t => t.style.display = 'none');
