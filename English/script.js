@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('langToggle').addEventListener('change', function () {
     if (this.checked) {
       // Go to Arabic version
-      location.href = 'arabic/index.html';
+      location.href = 'Arabic/index.html';
     }
   });
 
