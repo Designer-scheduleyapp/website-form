@@ -172,3 +172,8 @@ input[type="checkbox"]:hover { border-color: var(--primary); }
 .switch input:checked + .slider::before {
   transform: translateX(22px);
 }
+
+input, input::placeholder {
+  direction: rtl;
+  text-align: right;
+}
